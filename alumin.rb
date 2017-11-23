@@ -30,7 +30,7 @@ class Alumin
             when "d"
                 @stack.push @stack[-1]
             when "e"
-                @stack.push @stack.pop == @stack.pop
+                @stack.push @stack.pop == @stack.pop ? 1 : 0
             when "f"
                 cmd = ""
                 loop {
