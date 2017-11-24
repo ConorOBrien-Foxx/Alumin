@@ -1,5 +1,10 @@
 #!/bin/ruby
 require 'io/console'
+
+def getchar
+    STDIN.getc.ord rescue -1
+end
+
 class Alumin
     def initialize(cmds)
         @cmds = cmds.gsub(/[^a-z\s]/, "").scan(/h+|./)
@@ -52,7 +57,7 @@ class Alumin
             when "h"
                 @stack.push c.size
             when "i"
-                @stack.push STDIN.getc.ord
+                @stack.push getchar
             when "j"
                 @stack.push STDIN.gets.to_i
             when "k"
@@ -78,7 +83,7 @@ class Alumin
             when "o"
                 print @stack.pop.chr
             when "p"
-                unless @stack[-1] <= 0
+                unless @stack.empty? or @stack.last <= 0
                     depth = 0
                     loop {
                         depth -= 1 if cmds[@i] == "q"
@@ -88,13 +93,13 @@ class Alumin
                     }
                 end
             when "q"
-                if @stack[-1] <= 0
+                if @stack.empty? or @stack.last <= 0
                     depth = 0
                     loop {
                         depth += 1 if cmds[@i] == "q"
                         depth -= 1 if cmds[@i] == "p"
-                        @i += 1
                         break if depth == 0
+                        @i += 1
                     }
                 end
             when "r"
