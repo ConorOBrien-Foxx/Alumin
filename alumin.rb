@@ -98,9 +98,9 @@ class Alumin
                     }
                 end
             when "r"
-                @stack.reverse
+                @stack.reverse!
             when "s"
-                @stack.concat @stack_stack.pop
+                @stack = @stack_stack.pop + @stack
             when "t"
                 @stack.push @stack.pop * @stack.pop
             when "u"
@@ -122,4 +122,4 @@ class Alumin
 end
 inst = Alumin.new($<.read)
 inst.run
-puts inst.stack
+p inst.stack
