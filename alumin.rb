@@ -122,4 +122,4 @@ class Alumin
 end
 inst = Alumin.new($<.read)
 inst.run
-p inst.stack
+puts inst.stack
